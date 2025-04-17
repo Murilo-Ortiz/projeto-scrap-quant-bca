@@ -1,4 +1,3 @@
-task_md = """
 # 📋 Projeto: Análise Quantitativa com Indicadores Econômicos do Banco Central
 
 Este é o backlog de tarefas para desenvolvimento do projeto, seguindo uma estrutura baseada em metodologias ágeis (Scrum/Kanban). As tarefas estão organizadas por etapas.
@@ -9,9 +8,8 @@ Este é o backlog de tarefas para desenvolvimento do projeto, seguindo uma estru
 - [x] Montar estrutura de pastas do projeto
 - [x] Criar ambiente virtual com `venv`
 - [x] Inicializar repositório Git
-- [ ] Definir objetivo principal do projeto (ex: impacto da Selic e IPCA em ativos financeiros)
-- [ ] Escolher os indicadores econômicos a serem utilizados
-- [ ] Listar códigos das séries temporais no SGS/BCB
+- [x] Definir objetivo principal do projeto: "Analisar a relação entre indicadores econômicos divulgados pelo Banco Central do Brasil — como a taxa Selic, inflação (IPCA) e câmbio — e sua influência sobre o comportamento de ativos financeiros, visando extrair padrões que possam embasar estratégias quantitativas de investimento."
+- [x] Escolher os indicadores econômicos a serem utilizados
 
 ---
 
@@ -57,9 +55,3 @@ Este é o backlog de tarefas para desenvolvimento do projeto, seguindo uma estru
 - [ ] Criar notebook exploratório (`/notebooks`)
 - [ ] Subir repositório para o GitHub
 - [ ] (Opcional) Adicionar testes simples para a função de coleta
-"""
-
-# Salvar em arquivo
-with open("TASKS.md", "w", encoding="utf-8") as f:
-    f.write(task_md)
-

@@ -50,8 +50,8 @@ O projeto coleta e analisa os seguintes indicadores econômicos:
 Primeiro, faça o clone do repositório:
 
 ```bash
-git clone https://github.com/username/quant.git
-cd quant
+git clone https://github.com/Murilo-Ortiz/projeto-scrap-quant-bca.git
+cd projeto-scrap-quant-bca
 ```
 
 ### 2. Instalando dependências
@@ -71,23 +71,23 @@ Você pode utilizar as funcionalidades presentes em src/ para fazer as análises
 ## Estrutura do Projeto
 
 ```bash
-├── README.md             # Documentação do projeto
-├── TASKS.md              # Lista de tarefas e próximos passos
-├── data                  # Dados coletados (CSV)
-│   ├── cambio.csv        # Dados de Câmbio
-│   ├── ipca.csv          # Dados de IPCA
-│   └── selic.csv         # Dados de Selic
-├── main.py               # Script principal
-├── notebooks             # Notebooks Jupyter com análises exploratórias
-├── requirements.txt      # Dependências do projeto
-├── src                   # Código-fonte
-│   ├── __init__.py       # Pacote para organização
-│   ├── bcb_api.py        # Coleta de dados da API do Banco Central
-│   ├── estatisticas.py   # Funções para cálculo de estatísticas
-│   ├── modeloRegressao.py# Modelos de regressão e predição
+├── README.md               # Documentação do projeto
+├── TASKS.md                # Lista de tarefas e próximos passos
+├── data                    # Dados coletados (CSV)
+│   ├── cambio.csv          # Dados de Câmbio
+│   ├── ipca.csv            # Dados de IPCA
+│   └── selic.csv           # Dados de Selic
+├── main.py                 # Script principal
+├── notebooks               # Notebooks Jupyter com análises exploratórias
+├── requirements.txt        # Dependências do projeto
+├── src                     # Código-fonte
+│   ├── __init__.py         # Pacote para organização
+│   ├── bcb_api.py          # Coleta de dados da API do Banco Central
+│   ├── estatisticas.py     # Funções para cálculo de estatísticas
+│   ├── modeloRegressao.py  # Modelos de regressão e predição
 │   ├── preprocessamento.py # Funções de limpeza e preparação dos dados
-│   └── arima.py          # Implementação do modelo ARIMA
-├── tests                 # Testes automatizados
+│   └── arima.py            # Implementação do modelo ARIMA
+├── tests                   # Testes automatizados
 ```
 ---
 

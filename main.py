@@ -1,38 +1,53 @@
-import pandas as pd
-from src.bcb_api import coletar_dados_bcb, coletar_multiplos_indicadores
+from src.bcb_api import coletar_multiplos_indicadores
+from src.modeloRegressao import regressao_linear_indicadores
+from src.estatisticas import estatisticas_basicas, media_movel, variacao_percentual, relacao_indicadores
 from src.preprocessamento import preprocessar_dados
-from src.estatisticas import estatisticas_basicas, media_movel, variacao_percentual
-from src.modeloRegressao import regressao_linear
-from src.arima import ajustar_arima
+from src.arima import teste_adfuller, ajustar_arima
 import matplotlib.pyplot as plt
 
-# Coletar dados
-indicadores = ['4189', '11', '126']
-dados = coletar_multiplos_indicadores(indicadores, '2020-01-01', '2024-12-31')
+if __name__ == "__main__":
+    indicadores = ['selic', 'ipca', 'cambio']
+    data_inicio = "2023-01-01"
+    data_fim = "2023-12-31"
 
-dados_processados = preprocessar_dados(dados)
+    # 1. Coleta
+    dados = coletar_multiplos_indicadores(indicadores, data_inicio, data_fim)
 
-# Estatísticas básicas
-estatisticas = estatisticas_basicas(dados_processados)
-print(estatisticas)
+    # 2. Pré-processamento (sem normalização)
+    df_unificado = preprocessar_dados(dados, True)
 
-# Análise de Tendências
-dados_movel = media_movel(dados_processados)
-dados_variacao = variacao_percentual(dados_processados)
+    if df_unificado.empty:
+        print("❌ Falha no pré-processamento: DataFrame unificado está vazio.")
+    else:
+        print("✅ Dados unificados com sucesso:")
+        print(df_unificado.head())
 
-# Visualizando médias móveis
-dados_movel[['selic', 'selic_mm']].plot(title="Média Móvel de Selic")
-plt.show()
+    # Estatísticas básicas
+    estat = estatisticas_basicas(df_unificado)
+    print("📊 Estatísticas básicas:")
+    print(estat)
 
-# Visualizando variação percentual
-dados_variacao[['selic', 'ipca']].plot(title="Variação Percentual de Selic e IPCA")
-plt.show()
+    # Média móvel (30 dias)
+    df_mm = media_movel(df_unificado)
+    print("📈 Colunas com médias móveis adicionadas:")
+    print(df_mm.head())
 
-# Aplicar modelo de regressão linear para IPCA vs Selic
-regressao_linear(dados_processados)
+    # Variação percentual
+    df_var = variacao_percentual(df_unificado)
+    print("📉 Variação percentual (diária ou mensal):")
+    print(df_var.head())
 
-# Aplicar ARIMA para IPCA (com diferenciação, se necessário)
-if not teste_adfuller(dados_processados['ipca']):
-    dados_processados['ipca'] = diferenciacao(dados_processados['ipca'])
+    # Relação entre indicadores (gráficos de dispersão)
+    relacao_indicadores(df_unificado)
 
-resultado_arima = ajustar_arima(dados_processados['ipca'], p=1, d=1, q=1)
+    regressao_linear_indicadores(df_unificado, "selic", "ipca")
+    regressao_linear_indicadores(df_unificado, "cambio", "ipca")
+    regressao_linear_indicadores(df_unificado, "cambio", "selic")
+
+# Teste de estacionariedade e previsão ARIMA para o IPCA
+if teste_adfuller(df_unificado["ipca"]):
+    modelo_ipca = ajustar_arima(df_unificado["ipca"], p=1, d=0, q=1)
+else:
+    # Diferencia e aplica o ARIMA com d=1
+    serie_diferenciada = df_unificado["ipca"].diff().dropna()
+    modelo_ipca = ajustar_arima(serie_diferenciada, p=1, d=1, q=1)

@@ -1,9 +1,14 @@
-import sklearn
+import os
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 from statsmodels.tsa.arima.model import ARIMA
 from sklearn.metrics import mean_squared_error
-import numpy as np
 from statsmodels.tsa.stattools import adfuller
+
+# Define pasta de saída
+OUTPUT_DIR = "output"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def teste_adfuller(series: pd.Series) -> bool:
     """
@@ -18,30 +23,50 @@ def teste_adfuller(series: pd.Series) -> bool:
         print("A série não é estacionária (p-value >= 0.05).")
         return False
 
-def diferenciacao(series: pd.Series) -> pd.Series:
+def diferenciacao(series: pd.Series, nome_serie: str = "serie") -> pd.Series:
     """
     Aplica diferenciação de ordem 1 para tornar a série estacionária.
+    Salva um gráfico da série diferenciada.
     """
-    return series.diff().dropna()
+    serie_diff = series.diff().dropna()
 
-def ajustar_arima(series: pd.Series, p: int = 1, d: int = 1, q: int = 1) -> None:
+    plt.figure(figsize=(10, 4))
+    plt.plot(serie_diff)
+    plt.title("Série Diferenciada")
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUTPUT_DIR, f"{nome_serie}_diferenciada.png"))
+    plt.close()
+
+    return serie_diff
+
+def ajustar_arima(series: pd.Series, p: int = 1, d: int = 1, q: int = 1, nome_serie: str = "serie") -> ARIMA:
     """
     Ajusta um modelo ARIMA aos dados da série temporal.
+    Salva gráficos da série original e da previsão.
     """
+    plt.figure(figsize=(10, 4))
+    plt.plot(series)
+    plt.title("Série Original")
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUTPUT_DIR, f"{nome_serie}_original.png"))
+    plt.close()
+
     modelo = ARIMA(series, order=(p, d, q))
     resultado = modelo.fit()
 
-    print(resultado.summary())  # Resumo do modelo
+    print(resultado.summary())
 
-    # Previsão
-    previsao = resultado.forecast(steps=30)  # Previsão para os próximos 30 dias
-    plt.figure(figsize=(10, 6))
-    plt.plot(series, label="Dados Reais")
-    plt.plot(pd.date_range(series.index[-1], periods=30, freq='D'), previsao, label="Previsão ARIMA", color='red')
-    plt.title("Previsão ARIMA")
+    # Previsão futura
+    previsao = resultado.forecast(steps=30)
+
+    plt.figure(figsize=(10, 4))
+    plt.plot(series, label="Histórico")
+    plt.plot(pd.date_range(start=series.index[-1], periods=31, freq='D')[1:], previsao, label="Previsão", color="red")
     plt.legend()
-    plt.show()
-
+    plt.title("Previsão ARIMA")
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUTPUT_DIR, f"{nome_serie}_previsao.png"))
+    plt.close()
 
     return resultado
 

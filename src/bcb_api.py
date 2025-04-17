@@ -4,19 +4,22 @@ import requests
 from datetime import datetime
 
 INDICADORES = {
-    "selic": {
-        "nome": "Selic diária acumulada",
-        "codigo": 11
-    },
-    "ipca": {
-        "nome": "IPCA - Índice Nacional de Preços ao Consumidor Amplo (mensal)",
-        "codigo": 433
-    },
-    "cambio": {
-        "nome": "Dólar comercial - venda (fechamento)",
-        "codigo": 1
-    }
+    "selic": {"nome": "Selic diária acumulada", "codigo": 11},
+    "selic_meta": {"nome": "Meta da taxa Selic ao ano", "codigo": 432},
+    "ipca": {"nome": "IPCA - Índice Nacional de Preços ao Consumidor Amplo (mensal)", "codigo": 433},
+    "inpc": {"nome": "INPC - Índice Nacional de Preços ao Consumidor (mensal)", "codigo": 188},
+    "igpm": {"nome": "IGP-M - Índice Geral de Preços - Mercado (mensal)", "codigo": 189},
+    "cambio": {"nome": "Dólar comercial - venda (fechamento)", "codigo": 1},
+    "cambio_compra": {"nome": "Dólar comercial - compra (fechamento)", "codigo": 10813},
+    "euro": {"nome": "Euro - venda (fechamento)", "codigo": 21619},
+    "pib": {"nome": "PIB - Volume encadeado (base 1995) - trimestral", "codigo": 4380},
+    "ibc_br": {"nome": "IBC-Br - Índice de Atividade Econômica do Banco Central", "codigo": 24363},
+    "desemprego": {"nome": "Taxa de desocupação (IBGE - PNAD Contínua) - mensal", "codigo": 24369},
+    "inadimplencia": {"nome": "Taxa de inadimplência - recursos livres - pessoas físicas", "codigo": 28766},
+    "endividamento": {"nome": "Endividamento das famílias com o SFN / Renda acumulada em 12 meses", "codigo": 21082},
+    "comprometimento_renda": {"nome": "Comprometimento de renda das famílias com o SFN", "codigo": 21083}
 }
+
 
 def formatar_data(data: str) -> str:
     try:

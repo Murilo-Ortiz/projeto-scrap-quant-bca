@@ -14,8 +14,8 @@ Este é o backlog de tarefas para desenvolvimento do projeto, seguindo uma estru
 ---
 
 ## 📥 Coleta de Dados
-- [ ] Criar função para coletar dados da API do BCB (`src/bcb_api.py`)
-- [ ] Adicionar suporte para múltiplos indicadores simultaneamente
+- [x] Criar função para coletar dados da API do BCB (`src/bcb_api.py`)
+- [x] Adicionar suporte para múltiplos indicadores simultaneamente
 - [ ] Salvar dados coletados em arquivos CSV (`/data`)
 - [ ] Permitir seleção de intervalo de datas na coleta
 - [ ] Validar respostas da API (tratamento de erro)

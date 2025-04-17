@@ -1,0 +1,12 @@
+# Ambiente virtual
+venv/
+__pycache__/
+*.pyc
+
+# Dados e outputs
+/data/*.csv
+/data/*.json
+
+# Jupyter checkpoints
+notebooks/.ipynb_checkpoints/
+

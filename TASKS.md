@@ -16,25 +16,25 @@ Este é o backlog de tarefas para desenvolvimento do projeto, seguindo uma estru
 ## 📥 Coleta de Dados
 - [x] Criar função para coletar dados da API do BCB (`src/bcb_api.py`)
 - [x] Adicionar suporte para múltiplos indicadores simultaneamente
-- [ ] Salvar dados coletados em arquivos CSV (`/data`)
-- [ ] Permitir seleção de intervalo de datas na coleta
-- [ ] Validar respostas da API (tratamento de erro)
+- [x] Salvar dados coletados em arquivos CSV (`/data`)
+- [x] Permitir seleção de intervalo de datas na coleta
+- [x] Validar respostas da API (tratamento de erro)
 
 ---
 
 ## 🧹 Processamento de Dados
-- [ ] Padronizar formato de datas e números
-- [ ] Tratar dados ausentes ou inconsistentes
-- [ ] Unificar diversas séries em um único DataFrame
-- [ ] Criar função de limpeza/normalização dos dados
+- [x] Padronizar formato de datas e números
+- [x] Tratar dados ausentes ou inconsistentes
+- [x] Unificar diversas séries em um único DataFrame
+- [x] Criar função de limpeza/normalização dos dados
 
 ---
 
 ## 📊 Análise Quantitativa
-- [ ] Calcular estatísticas básicas (média, desvio padrão, correlação)
-- [ ] Analisar tendências (média móvel, variação percentual)
-- [ ] Estudar relações entre os indicadores (ex: IPCA vs Selic)
-- [ ] Aplicar modelo preditivo simples (ex: regressão linear, ARIMA)
+- [x] Calcular estatísticas básicas (média, desvio padrão, correlação)
+- [x] Analisar tendências (média móvel, variação percentual)
+- [x] Estudar relações entre os indicadores (ex: IPCA vs Selic)
+- [x] Aplicar modelo preditivo simples (ex: regressão linear, ARIMA)
 
 ---
 

@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 indicadores = ['4189', '11', '126']
 dados = coletar_multiplos_indicadores(indicadores, '2020-01-01', '2024-12-31')
 
-# Preprocessamento de dados
 dados_processados = preprocessar_dados(dados)
 
 # Estatísticas básicas
